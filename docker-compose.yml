@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  mysql:
+    build: ./mysql
+    container_name: mysql
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_USER_PASS}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASS}
+      MYSQL_DATABASE: ${DATABASE_NAME}
+
+  redmine:
+    build: ./redmine
+    container_name: redmine
+    volumes:
+      - ./redmine/files:/usr/redmine/files
+    ports:
+      - "5000:3000"
+    links:
+      - mysql
+    restart: always
+    environment:
+      TZ: Asia/Tokyo
+      REDMINE_DB_MYSQL: mysql
+      REDMINE_DB_USERNAME: ${DB_USER}
+      REDMINE_DB_PASSWORD: ${DB_USER_PASS}
+      REDMINE_DB_DATABASE: ${DATABASE_NAME}
+

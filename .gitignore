@@ -1,0 +1,11 @@
+/.env
+
+/mysql/data/
+
+/redmine/files/*
+/redmine/plugins/*
+/redmine/themes/*
+!/redmine/files/.gitkeep
+!/redmine/plugins/.gitkeep
+!/redmine/themes/.gitkeep
+
